@@ -1,0 +1,23 @@
+﻿@model List<BillViewModel>
+
+
+<form asp-action="GetBills"
+      asp-controller="Home"
+      method="post"
+      enctype="multipart/form-data">
+    <input type="date" id="date1" name="date1" onchange="setDate2(event);" />
+    <input type="date" id="date2" name="date2" />
+    <button class="" type="submit">Pokaż</button>
+</form>
+
+<div id="billsTable">
+    @{
+        Html.RenderPartial("Table.cshtml", Model);
+    }
+</div>
+
+
+@{
+    Html.RenderPartial("~/Views/Modals/MenuItemsModalView.cshtml"); //, new ViewDataDictionary(this.ViewData));
+}
+

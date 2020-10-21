@@ -1,0 +1,139 @@
+﻿@model List<BillViewModel>
+
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Numer rachunku</th>
+            <th>Stolik</th>
+            <th>Forma rabatowania</th>
+            <th>Kelner</th>
+            <th>Otwarcie rachunku</th>
+            <th>Zamknięcie rachunku</th>
+            <th>Data ostatniej obsługi</th>
+            <th>Liczba gości</th>
+            <th>Opis</th>
+            <th>Netto</th>
+            <th>Brutto</th>
+            <th>Ustalona wartość rachunku</th>
+            <th>Pozycje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null)
+            {
+                foreach (var bill in Model)
+                {
+                    <tr>
+                        <th>@bill.Number</th>
+                        <th>@bill.TableName</th>
+                        <th>@bill.DiscountType</th>
+                        <th>@bill.Waiter</th>
+                        <th>@bill.OpenDate</th>
+                        <th>@bill.CloseDate</th>
+                        <th>@bill.LastServiceDate</th>
+                        <th>@bill.GuestsCount</th>
+                        <th>@bill.Description</th>
+                        <th>@bill.NettoValueOfBill</th>
+                        <th>@bill.BruttoValueOfBill</th>
+                        <th>@bill.SettedValueOfBill</th>
+                        <th>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#menuItemsModal">
+                               +
+                             </button>
+                            @*<button type="button" class="btn btn-primary">+</button>*@
+                        </th>
+                    </tr>
+                }
+            }
+        }
+
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Numer rachunku</th>
+            <th>Stolik</th>
+            <th>Forma rabatowania</th>
+            <th>Kelner</th>
+            <th>Otwarcie rachunku</th>
+            <th>Zamknięcie rachunku</th>
+            <th>Data ostatniej obsługi</th>
+            <th>Liczba gości</th>
+            <th>Opis</th>
+            <th>Netto</th>
+            <th>Brutto</th>
+            <th>Ustalona wartość rachunku</th>
+            <th>?</th>
+        </tr>
+    </tfoot>
+</table>
+
+<!-- Modal -->
+@*<div class="modal fade" id="menuItemsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+@*<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter">
+        <div class="line number1 index0 alt2">1</div>
+        <div class="line number2 index1 alt1">2</div>
+        <div class="line number3 index2 alt2">3</div>
+        <div class="line number4 index3 alt1">4</div>
+        <div class="line number5 index4 alt2">5</div>
+        <div class="line number6 index5 alt1">6</div>
+        <div class="line number7 index6 alt2">7</div>
+        <div class="line number8 index7 alt1">8</div>
+        <div class="line number9 index8 alt2">9</div>
+        <div class="line number10 index9 alt1">10</div>
+        <div class="line number11 index10 alt2">11</div>
+        <div class="line number12 index11 alt1">12</div>
+        <div class="line number13 index12 alt2">13</div>
+        <div class="line number14 index13 alt1">14</div>
+        <div class="line number15 index14 alt2">15</div>
+        <div class="line number16 index15 alt1">16</div>
+        <div class="line number17 index16 alt2">17</div>
+        <div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div>
+        <div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div>
+        <div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div>
+        <div class="line number24 index23 alt1">24</div><div class="line number25 index24 alt2">25</div>
+        <div class="line number26 index25 alt1">26</div>
+        </td>
+
+        <td class="code"><div class="container">
+            <div class="line number1 index0 alt2"><code class="js plain">$(document).ready(</code><code class="js keyword">function</code><code class="js plain">() {</code></div><div class="line number2 index1 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js comments">// Setup - add a text input to each footer cell</code></div>
+            <div class="line number3 index2 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js string">'#example tfoot th'</code><code class="js plain">).each( </code><code class="js keyword">function</code> <code class="js plain">() {</code></div><div class="line number4 index3 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js keyword">var</code> <code class="js plain">title = $(</code><code class="js keyword">this</code><code class="js plain">).text();</code></div>
+            <div class="line number5 index4 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js keyword">this</code><code class="js plain">).html( </code><code class="js string">'&lt;input type="text" placeholder="Search '</code><code class="js plain">+title+</code><code class="js string">'" /&gt;'</code> <code class="js plain">);</code></div><div class="line number6 index5 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">} );</code></div><div class="line number7 index6 alt2">&nbsp;</div>
+            <div class="line number8 index7 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js comments">
+
+                // DataTable</code>
+            </div>
+
+            <div class="line number9 index8 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js keyword">var</code> <code class="js plain">table = $(</code><code class="js string">'#example'</code><code class="js plain">).DataTable({</code></div>
+            <div class="line number10 index9 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">initComplete: </code><code class="js keyword">function</code> <code class="js plain">() {</code></div><div class="line number11 index10 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js comments">// Apply the search</code></div><div class="line number12 index11 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js keyword">this</code><code class="js plain">.api().columns().every( </code><code class="js keyword">function</code> <code class="js plain">() {</code></div><div class="line number13 index12 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js keyword">var</code> <code class="js plain">that = </code><code class="js keyword">this</code><code class="js plain">;</code></div><div class="line number14 index13 alt1">&nbsp;</div><div class="line number15 index14 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$( </code><code class="js string">'input'</code><code class="js plain">, </code><code class="js keyword">this</code><code class="js plain">.footer() ).on( </code><code class="js string">'keyup change clear'</code><code class="js plain">, </code><code class="js keyword">function</code> <code class="js plain">() {</code></div><div class="line number16 index15 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js keyword">if</code> <code class="js plain">( that.search() !== </code><code class="js keyword">this</code><code class="js plain">.value ) {</code></div><div class="line number17 index16 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">that</code></div><div class="line number18 index17 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">.search( </code><code class="js keyword">this</code><code class="js plain">.value )</code></div>
+            <div class="line number19 index18 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">.draw();</code></div><div class="line number20 index19 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">}</code></div><div class="line number21 index20 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">} );</code></div><div class="line number22 index21 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">} );</code></div><div class="line number23 index22 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">}</code></div><div class="line number24 index23 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">});</code></div><div class="line number25 index24 alt2">&nbsp;</div><div class="line number26 index25 alt1"><code class="js plain">} );</code></div></div></td></tr></tbody></table>
+    <table border="0" cellpadding="0" cellspacing="0"><tbody><tr>
+        <td class="gutter"><div class="line number1 index0 alt2">1</div>
+        <div class="line number2 index1 alt1">2</div>
+        <div class="line number3 index2 alt2">3</div>
+        <div class="line number4 index3 alt1">4</div>
+        <div class="line number5 index4 alt2">5</div>
+           </td><td class="code"><div class="container">
+        <div class="line number1 index0 alt2"><code class="css plain">tfoot input {</code></div>
+        <div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">width</code><code class="css plain">: </code><code class="css value">100%</code><code class="css plain">;</code></div>
+        <div class="line number3 index2 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">padding</code><code class="css plain">: </code><code class="css value">3px</code><code class="css plain">;</code></div><div class="line number4 index3 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css plain">box-sizing: border-box;</code></div><div class="line number5 index4 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css plain">}</code></div></div></td></tr></tbody></table>*@

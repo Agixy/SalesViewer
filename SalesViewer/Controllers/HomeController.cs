@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SalesViewer.Models;
 using SalesViewerService;
@@ -12,20 +13,28 @@ namespace SalesViewer.Controllers
     public class HomeController : Controller
     {
         private readonly BillsDbContext _context;
+        public IConfiguration Configuration { get; }
 
-        public HomeController(ILogger<HomeController> logger, BillsDbContext context)
+        public HomeController(ILogger<HomeController> logger, BillsDbContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
         public IActionResult Index()
         {
-            return View("BillsView");
+            return View();
         }
 
-        public IActionResult BillsView(IList<BillViewModel> list)
+        [HttpPost]
+        public IActionResult CheckPassword(string password)
         {
-            return View(list);
+            if(password.Equals(Configuration.GetSection("Passwords")["MainAccess"]))
+            {
+                return View("BillsView");
+            }
+
+            return View("Index");
         }
 
         [HttpPost]

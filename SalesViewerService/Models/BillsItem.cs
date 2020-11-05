@@ -1,4 +1,6 @@
-﻿namespace SalesViewerService.Models
+﻿using System;
+
+namespace SalesViewerService.Models
 {
     public class BillsItem
     {
@@ -8,5 +10,7 @@
         public decimal BruttoPrice { get; set; }
         public decimal Count { get; set; }
         public int MenuItemId { get; set; }
+        public DateTime? CancellationDate { get; set; }
+        public int? CancellingWaiterId { get; set; }
     }
 }

@@ -16,5 +16,7 @@ namespace SalesViewer.Models
         public decimal NettoValueOfBill { get; set; }
         public decimal BruttoValueOfBill { get; set; }
         public decimal? SettedValueOfBill { get; set; }
+        public DateTime? CancellationDate { get; set; }
+        public int? CancellingWaiter{ get; set; }
     }
 }

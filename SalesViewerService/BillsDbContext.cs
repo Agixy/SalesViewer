@@ -57,10 +57,13 @@ namespace SalesViewerService
             modelBuilder.Entity<BillsItem>().Property(d => d.BruttoPrice).HasColumnName("DSL_CenaSprzedazyBrutto");
             modelBuilder.Entity<BillsItem>().Property(d => d.Count).HasColumnName("DSL_Ilosc");
             modelBuilder.Entity<BillsItem>().Property(d => d.MenuItemId).HasColumnName("DSL_ARTID");
+            modelBuilder.Entity<BillsItem>().Property(d => d.CancellationDate).HasColumnName("DSL_DataStorna");
+            modelBuilder.Entity<BillsItem>().Property(d => d.CancellingWaiterId).HasColumnName("DSL_OPRIDStornujacego");
 
             modelBuilder.Entity<MenuItem>().ToTable("ART_Artykuly");
             modelBuilder.Entity<MenuItem>().Property(d => d.Id).HasColumnName("ART_ID");
             modelBuilder.Entity<MenuItem>().Property(d => d.Name).HasColumnName("ART_Nazwa");
+           
 
             base.OnModelCreating(modelBuilder);
         }      

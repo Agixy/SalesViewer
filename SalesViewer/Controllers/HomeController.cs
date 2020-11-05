@@ -40,10 +40,10 @@ namespace SalesViewer.Controllers
         [HttpPost]
         public IActionResult GetBills(DateTime date1, DateTime date2)
         {
-            var x = _context.Bills.Where(b => b.OpenDate.Date >= date1.Date && b.OpenDate.Date <= date2.Date).ToList();
+            var bills = _context.Bills.Where(b => b.OpenDate.Date >= date1.Date && b.OpenDate.Date <= date2.Date).ToList();
             var result = new List<BillViewModel>();
 
-            foreach (var item in x)
+            foreach (var item in bills)
             {
                 string discount = "-";
                 if (item.DiscountFormId != null)
@@ -56,11 +56,21 @@ namespace SalesViewer.Controllers
                     }
                 }
 
-                var y = _context.BillsItems.First();
-
                 var items = _context.BillsItems.Where(i => i.BillsId == item.Id).ToList();
-                var nettoValueOfBill = items.Sum(i => i.NettoPrice);
-                var bruttoValueOfBill = items.Sum(i => i.BruttoPrice);
+
+                decimal nettoValueOfBill = 0;
+                decimal bruttoValueOfBill = 0;
+                DateTime? date;
+
+                foreach (var menuItem in items)
+                {
+                    if(menuItem.CancellationDate == null)
+                    {
+                        nettoValueOfBill += menuItem.NettoPrice * menuItem.Count;
+                        bruttoValueOfBill += menuItem.BruttoPrice * menuItem.Count;
+                    }          
+                }
+                
 
                 result.Add(new BillViewModel()   // TODO: Use AutoMapper
                 {
@@ -91,8 +101,13 @@ namespace SalesViewer.Controllers
 
             foreach (var billItem in billsItems)
             {
+                string cancellation = String.Empty;
+                if (billItem.CancellationDate != null)
+                {
+                    cancellation = "ANULACJA";
+                }
                 var menuItem = _context.MenuItems.FirstOrDefault(i => i.Id == billItem.MenuItemId);
-                menuItems.Add(menuItem.Name + " - " + (int)billItem.Count + " sztuk");
+                menuItems.Add(menuItem.Name + " - " + (int)billItem.Count + " sztuk " + cancellation);
             }
            
             return Json(menuItems);

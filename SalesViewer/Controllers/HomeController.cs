@@ -31,18 +31,18 @@ namespace SalesViewer.Controllers
         {
             if(password.Equals(Configuration.GetSection("Passwords")["MainAccess"]))
             {
-                return View("BillsView");
+                return GetBills(DateTime.Now, DateTime.Now);
             }
 
             return View("Index");
         }
 
         [HttpPost]
-        public IActionResult GetBills(DateTime date1, DateTime date2)
+        public IActionResult GetBills(DateTime startDate, DateTime endDate)
         {
-            var bills = _context.Bills.Where(b => b.OpenDate.Date >= date1.Date && b.OpenDate.Date <= date2.Date).ToList();
-            var result = new List<BillViewModel>();
-
+            var bills = _context.Bills.Where(b => b.OpenDate.Date >= startDate.Date && b.OpenDate.Date <= endDate.Date).ToList();
+            var result = new BillsListViewModel() { StartDate = startDate, EndDate = endDate };
+            
             foreach (var item in bills)
             {
                 string discount = "-";
@@ -60,7 +60,6 @@ namespace SalesViewer.Controllers
 
                 decimal nettoValueOfBill = 0;
                 decimal bruttoValueOfBill = 0;
-                DateTime? date;
 
                 foreach (var menuItem in items)
                 {
@@ -71,8 +70,7 @@ namespace SalesViewer.Controllers
                     }          
                 }
                 
-
-                result.Add(new BillViewModel()   // TODO: Use AutoMapper
+                result.Bills.Add(new BillViewModel()   // TODO: Use AutoMapper
                 {
                     Number = item.Number,
                     DiscountType = discount, 

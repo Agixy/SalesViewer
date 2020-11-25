@@ -1,6 +1,6 @@
 ﻿
-function setDate2(e) {    
-    $('#date2').val(e.target.value);
+function setEndDate(e) {    
+    $('#EndDate').val(e.target.value);
 }
 
 $(document).ready(function () {

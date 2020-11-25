@@ -11,6 +11,7 @@ $(document).ready(function () {
     });
 
     var table = $('#example').DataTable({
+        "lengthMenu": [[25, 50, -1], [25, 50, "Wszystko"]],
         initComplete: function () {
             this.api().columns().every(function () {
                 var that = this;

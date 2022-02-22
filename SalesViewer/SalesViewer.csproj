@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <UserSecretsId>de5e9f30-baa2-44dd-8a22-66eed9f1cc84</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

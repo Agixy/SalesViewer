@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SalesViewerService;
 using Microsoft.EntityFrameworkCore;
+using SalesViewerService.Repositories;
+using SalesViewerService.Interfaces;
 
 namespace SalesViewer
 {
@@ -19,7 +21,8 @@ namespace SalesViewer
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BillsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MartaDBConntectionString")));
+            services.AddDbContext<BillsDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MartaDBConntectionString")));           
+            services.AddScoped<IBillRepository, BillRepository>();
             services.AddControllersWithViews();
         }
 

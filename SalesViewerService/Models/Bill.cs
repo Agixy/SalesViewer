@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,9 +10,12 @@ namespace SalesViewerService.Models
     {
         [Key]
         public long Id { get; set; }
-        public int Number { get; set; }      
-        public int? TableId { get; set; }     
+        public int Number { get; set; }
+        public Table Table { get; set; }
+        public int? TableId { get; set; }    
+        public DiscountForm DiscountForm { get; set; }
         public int? DiscountFormId { get; set; }
+        public Waiter Waiter { get; set; }
         public int WaiterId { get; set; }    
         public DateTime OpenDate { get; set; }
         public DateTime? CloseDate { get; set; }
@@ -19,5 +23,6 @@ namespace SalesViewerService.Models
         public decimal? GuestsCount { get; set; }
         public string Description { get; set; }
         public decimal? SettedValueOfBill { get; set; }
+        public IList<BillsItem> BillsItems { get; set; }
     }
 }

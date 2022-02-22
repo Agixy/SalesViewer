@@ -52,7 +52,7 @@ namespace SalesViewerService
 
             modelBuilder.Entity<BillsItem>().ToTable("DSL_DokumentySprzedazyLinijki");
             modelBuilder.Entity<BillsItem>().Property(d => d.Id).HasColumnName("DSL_ID");
-            modelBuilder.Entity<BillsItem>().Property(d => d.BillsId).HasColumnName("DSL_DSRID");
+            modelBuilder.Entity<BillsItem>().Property(d => d.BillId).HasColumnName("DSL_DSRID");
             modelBuilder.Entity<BillsItem>().Property(d => d.NettoPrice).HasColumnName("DSL_CenaSprzedazyNetto");
             modelBuilder.Entity<BillsItem>().Property(d => d.BruttoPrice).HasColumnName("DSL_CenaSprzedazyBrutto");
             modelBuilder.Entity<BillsItem>().Property(d => d.Count).HasColumnName("DSL_Ilosc");
@@ -60,10 +60,16 @@ namespace SalesViewerService
             modelBuilder.Entity<BillsItem>().Property(d => d.CancellationDate).HasColumnName("DSL_DataStorna");
             modelBuilder.Entity<BillsItem>().Property(d => d.CancellingWaiterId).HasColumnName("DSL_OPRIDStornujacego");
 
+            modelBuilder.Entity<BillsItem>().HasOne(i => i.Bill).WithMany(b => b.BillsItems).HasForeignKey(p => p.BillId);
+
             modelBuilder.Entity<MenuItem>().ToTable("ART_Artykuly");
             modelBuilder.Entity<MenuItem>().Property(d => d.Id).HasColumnName("ART_ID");
             modelBuilder.Entity<MenuItem>().Property(d => d.Name).HasColumnName("ART_Nazwa");
-           
+
+            modelBuilder.Entity<Bill>().HasOne(p => p.DiscountForm).WithMany();
+            modelBuilder.Entity<Bill>().HasOne(p => p.Waiter).WithMany();
+            modelBuilder.Entity<Bill>().HasOne(p => p.Table).WithMany();
+            modelBuilder.Entity<BillsItem>().HasOne(p => p.MenuItem).WithMany();
 
             base.OnModelCreating(modelBuilder);
         }      
